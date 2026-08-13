@@ -1,0 +1,148 @@
+import { Flashcard } from "../types";
+
+/**
+ * Vocabulary for Integrated Chinese, Level 1 Part 2 (4th edition), Lessons 11–20.
+ * Each entry carries simplified + traditional characters, pinyin, an English
+ * gloss, and a short example sentence with its translation.
+ */
+export const INTEGRATED_CHINESE_1_PART2: Flashcard[] = [
+  // ── Lesson 11: Talking about the Weather ─────────────────────────────
+  { id: "ic1-l11-1", lesson: 11, simplified: "天气", traditional: "天氣", pinyin: "tiān qì", english: "weather", sentence: "今天天气很好。", sentenceEnglish: "The weather is nice today." },
+  { id: "ic1-l11-2", lesson: 11, simplified: "比", traditional: "比", pinyin: "bǐ", english: "compared to; than", sentence: "今天比昨天冷。", sentenceEnglish: "Today is colder than yesterday." },
+  { id: "ic1-l11-3", lesson: 11, simplified: "下雨", traditional: "下雨", pinyin: "xià yǔ", english: "to rain", sentence: "明天会下雨。", sentenceEnglish: "It will rain tomorrow." },
+  { id: "ic1-l11-4", lesson: 11, simplified: "暖和", traditional: "暖和", pinyin: "nuǎn huo", english: "warm", sentence: "春天很暖和。", sentenceEnglish: "Spring is warm." },
+  { id: "ic1-l11-5", lesson: 11, simplified: "冷", traditional: "冷", pinyin: "lěng", english: "cold", sentence: "冬天很冷。", sentenceEnglish: "Winter is cold." },
+  { id: "ic1-l11-6", lesson: 11, simplified: "热", traditional: "熱", pinyin: "rè", english: "hot", sentence: "夏天很热。", sentenceEnglish: "Summer is hot." },
+  { id: "ic1-l11-7", lesson: 11, simplified: "舒服", traditional: "舒服", pinyin: "shū fu", english: "comfortable", sentence: "今天天气很舒服。", sentenceEnglish: "The weather is comfortable today." },
+  { id: "ic1-l11-8", lesson: 11, simplified: "预报", traditional: "預報", pinyin: "yù bào", english: "forecast", sentence: "天气预报说明天下雨。", sentenceEnglish: "The forecast says it will rain tomorrow." },
+  { id: "ic1-l11-9", lesson: 11, simplified: "更", traditional: "更", pinyin: "gèng", english: "even more", sentence: "今天更冷了。", sentenceEnglish: "Today is even colder." },
+  { id: "ic1-l11-10", lesson: 11, simplified: "糟糕", traditional: "糟糕", pinyin: "zāo gāo", english: "terrible; too bad", sentence: "糟糕，下雨了！", sentenceEnglish: "Oh no, it's raining!" },
+  { id: "ic1-l11-11", lesson: 11, simplified: "凉快", traditional: "涼快", pinyin: "liáng kuai", english: "pleasantly cool", sentence: "秋天很凉快。", sentenceEnglish: "Autumn is pleasantly cool." },
+  { id: "ic1-l11-12", lesson: 11, simplified: "刮风", traditional: "颳風", pinyin: "guā fēng", english: "to be windy", sentence: "今天刮风了。", sentenceEnglish: "It's windy today." },
+
+  // ── Lesson 12: Dining ────────────────────────────────────────────────
+  { id: "ic1-l12-1", lesson: 12, simplified: "饭馆", traditional: "飯館", pinyin: "fàn guǎn", english: "restaurant", sentence: "这家饭馆很有名。", sentenceEnglish: "This restaurant is famous." },
+  { id: "ic1-l12-2", lesson: 12, simplified: "服务员", traditional: "服務員", pinyin: "fú wù yuán", english: "waiter; server", sentence: "服务员，请点菜。", sentenceEnglish: "Waiter, we'd like to order." },
+  { id: "ic1-l12-3", lesson: 12, simplified: "点菜", traditional: "點菜", pinyin: "diǎn cài", english: "to order food", sentence: "我们开始点菜吧。", sentenceEnglish: "Let's start ordering." },
+  { id: "ic1-l12-4", lesson: 12, simplified: "饺子", traditional: "餃子", pinyin: "jiǎo zi", english: "dumplings", sentence: "我要一盘饺子。", sentenceEnglish: "I want a plate of dumplings." },
+  { id: "ic1-l12-5", lesson: 12, simplified: "肉", traditional: "肉", pinyin: "ròu", english: "meat", sentence: "我不吃肉。", sentenceEnglish: "I don't eat meat." },
+  { id: "ic1-l12-6", lesson: 12, simplified: "碗", traditional: "碗", pinyin: "wǎn", english: "bowl (measure word)", sentence: "我要一碗米饭。", sentenceEnglish: "I want a bowl of rice." },
+  { id: "ic1-l12-7", lesson: 12, simplified: "汤", traditional: "湯", pinyin: "tāng", english: "soup", sentence: "这个汤很好喝。", sentenceEnglish: "This soup is delicious." },
+  { id: "ic1-l12-8", lesson: 12, simplified: "渴", traditional: "渴", pinyin: "kě", english: "thirsty", sentence: "我很渴，想喝水。", sentenceEnglish: "I'm thirsty and want water." },
+  { id: "ic1-l12-9", lesson: 12, simplified: "饿", traditional: "餓", pinyin: "è", english: "hungry", sentence: "我饿了，想吃饭。", sentenceEnglish: "I'm hungry and want to eat." },
+  { id: "ic1-l12-10", lesson: 12, simplified: "上菜", traditional: "上菜", pinyin: "shàng cài", english: "to serve food", sentence: "服务员很快就上菜了。", sentenceEnglish: "The waiter served the food quickly." },
+  { id: "ic1-l12-11", lesson: 12, simplified: "糖", traditional: "糖", pinyin: "táng", english: "sugar", sentence: "我不要放糖。", sentenceEnglish: "I don't want any sugar added." },
+  { id: "ic1-l12-12", lesson: 12, simplified: "极", traditional: "極", pinyin: "jí", english: "extremely", sentence: "这个菜好吃极了。", sentenceEnglish: "This dish is extremely delicious." },
+
+  // ── Lesson 13: Asking Directions ─────────────────────────────────────
+  { id: "ic1-l13-1", lesson: 13, simplified: "上", traditional: "上", pinyin: "shàng", english: "above; on top", sentence: "书在桌子上。", sentenceEnglish: "The book is on the table." },
+  { id: "ic1-l13-2", lesson: 13, simplified: "旁边", traditional: "旁邊", pinyin: "páng biān", english: "side; next to", sentence: "商店在银行旁边。", sentenceEnglish: "The store is next to the bank." },
+  { id: "ic1-l13-3", lesson: 13, simplified: "对面", traditional: "對面", pinyin: "duì miàn", english: "opposite side", sentence: "图书馆在对面。", sentenceEnglish: "The library is across the way." },
+  { id: "ic1-l13-4", lesson: 13, simplified: "中间", traditional: "中間", pinyin: "zhōng jiān", english: "middle; between", sentence: "他坐在我们中间。", sentenceEnglish: "He sits between us." },
+  { id: "ic1-l13-5", lesson: 13, simplified: "左", traditional: "左", pinyin: "zuǒ", english: "left", sentence: "往左拐。", sentenceEnglish: "Turn left." },
+  { id: "ic1-l13-6", lesson: 13, simplified: "右", traditional: "右", pinyin: "yòu", english: "right", sentence: "往右走。", sentenceEnglish: "Go to the right." },
+  { id: "ic1-l13-7", lesson: 13, simplified: "一直", traditional: "一直", pinyin: "yì zhí", english: "straight; continuously", sentence: "一直往前走。", sentenceEnglish: "Go straight ahead." },
+  { id: "ic1-l13-8", lesson: 13, simplified: "往", traditional: "往", pinyin: "wǎng", english: "towards", sentence: "往北走。", sentenceEnglish: "Go towards the north." },
+  { id: "ic1-l13-9", lesson: 13, simplified: "拐", traditional: "拐", pinyin: "guǎi", english: "to turn", sentence: "在前面拐弯。", sentenceEnglish: "Turn at the front." },
+  { id: "ic1-l13-10", lesson: 13, simplified: "离", traditional: "離", pinyin: "lí", english: "away from; from", sentence: "学校离我家很近。", sentenceEnglish: "The school is close to my home." },
+  { id: "ic1-l13-11", lesson: 13, simplified: "远", traditional: "遠", pinyin: "yuǎn", english: "far", sentence: "飞机场离这儿很远。", sentenceEnglish: "The airport is far from here." },
+  { id: "ic1-l13-12", lesson: 13, simplified: "近", traditional: "近", pinyin: "jìn", english: "near; close", sentence: "商店离这儿很近。", sentenceEnglish: "The store is near here." },
+
+  // ── Lesson 14: Birthday Party ────────────────────────────────────────
+  { id: "ic1-l14-1", lesson: 14, simplified: "舞会", traditional: "舞會", pinyin: "wǔ huì", english: "dance party", sentence: "今晚有一个舞会。", sentenceEnglish: "There's a dance party tonight." },
+  { id: "ic1-l14-2", lesson: 14, simplified: "礼物", traditional: "禮物", pinyin: "lǐ wù", english: "gift", sentence: "这是给你的礼物。", sentenceEnglish: "This is a gift for you." },
+  { id: "ic1-l14-3", lesson: 14, simplified: "水果", traditional: "水果", pinyin: "shuǐ guǒ", english: "fruit", sentence: "她喜欢吃水果。", sentenceEnglish: "She likes eating fruit." },
+  { id: "ic1-l14-4", lesson: 14, simplified: "苹果", traditional: "蘋果", pinyin: "píng guǒ", english: "apple", sentence: "我每天吃一个苹果。", sentenceEnglish: "I eat an apple every day." },
+  { id: "ic1-l14-5", lesson: 14, simplified: "西瓜", traditional: "西瓜", pinyin: "xī guā", english: "watermelon", sentence: "夏天我喜欢吃西瓜。", sentenceEnglish: "I like eating watermelon in summer." },
+  { id: "ic1-l14-6", lesson: 14, simplified: "把", traditional: "把", pinyin: "bǎ", english: "(object-marking preposition)", sentence: "请把礼物给他。", sentenceEnglish: "Please give the gift to him." },
+  { id: "ic1-l14-7", lesson: 14, simplified: "祝", traditional: "祝", pinyin: "zhù", english: "to wish (well)", sentence: "祝你生日快乐！", sentenceEnglish: "Happy birthday to you!" },
+  { id: "ic1-l14-8", lesson: 14, simplified: "长大", traditional: "長大", pinyin: "zhǎng dà", english: "to grow up", sentence: "他在北京长大。", sentenceEnglish: "He grew up in Beijing." },
+  { id: "ic1-l14-9", lesson: 14, simplified: "饮料", traditional: "飲料", pinyin: "yǐn liào", english: "beverage", sentence: "桌子上有很多饮料。", sentenceEnglish: "There are many drinks on the table." },
+  { id: "ic1-l14-10", lesson: 14, simplified: "表姐", traditional: "表姐", pinyin: "biǎo jiě", english: "older female cousin", sentence: "这是我的表姐。", sentenceEnglish: "This is my older cousin." },
+  { id: "ic1-l14-11", lesson: 14, simplified: "好玩儿", traditional: "好玩兒", pinyin: "hǎo wánr", english: "fun", sentence: "这个舞会很好玩儿。", sentenceEnglish: "This party is fun." },
+  { id: "ic1-l14-12", lesson: 14, simplified: "快乐", traditional: "快樂", pinyin: "kuài lè", english: "happy", sentence: "祝你生日快乐！", sentenceEnglish: "Wishing you a happy birthday!" },
+
+  // ── Lesson 15: Seeing a Doctor ───────────────────────────────────────
+  { id: "ic1-l15-1", lesson: 15, simplified: "看病", traditional: "看病", pinyin: "kàn bìng", english: "to see a doctor", sentence: "我要去医院看病。", sentenceEnglish: "I need to go to the hospital to see a doctor." },
+  { id: "ic1-l15-2", lesson: 15, simplified: "病人", traditional: "病人", pinyin: "bìng rén", english: "patient", sentence: "医院里有很多病人。", sentenceEnglish: "There are many patients in the hospital." },
+  { id: "ic1-l15-3", lesson: 15, simplified: "医院", traditional: "醫院", pinyin: "yī yuàn", english: "hospital", sentence: "医院离这儿不远。", sentenceEnglish: "The hospital is not far from here." },
+  { id: "ic1-l15-4", lesson: 15, simplified: "肚子", traditional: "肚子", pinyin: "dù zi", english: "belly; stomach", sentence: "我肚子疼。", sentenceEnglish: "My stomach hurts." },
+  { id: "ic1-l15-5", lesson: 15, simplified: "疼", traditional: "疼", pinyin: "téng", english: "to ache; to hurt", sentence: "我的头很疼。", sentenceEnglish: "My head hurts a lot." },
+  { id: "ic1-l15-6", lesson: 15, simplified: "生病", traditional: "生病", pinyin: "shēng bìng", english: "to get sick", sentence: "他生病了，没来上课。", sentenceEnglish: "He got sick and didn't come to class." },
+  { id: "ic1-l15-7", lesson: 15, simplified: "药", traditional: "藥", pinyin: "yào", english: "medicine", sentence: "医生给我开了药。", sentenceEnglish: "The doctor prescribed me medicine." },
+  { id: "ic1-l15-8", lesson: 15, simplified: "打针", traditional: "打針", pinyin: "dǎ zhēn", english: "to get an injection", sentence: "我很怕打针。", sentenceEnglish: "I'm afraid of injections." },
+  { id: "ic1-l15-9", lesson: 15, simplified: "检查", traditional: "檢查", pinyin: "jiǎn chá", english: "to examine; check-up", sentence: "医生给我检查身体。", sentenceEnglish: "The doctor examined me." },
+  { id: "ic1-l15-10", lesson: 15, simplified: "健康", traditional: "健康", pinyin: "jiàn kāng", english: "health; healthy", sentence: "运动对健康很好。", sentenceEnglish: "Exercise is good for your health." },
+  { id: "ic1-l15-11", lesson: 15, simplified: "感冒", traditional: "感冒", pinyin: "gǎn mào", english: "to catch a cold", sentence: "我感冒了。", sentenceEnglish: "I caught a cold." },
+  { id: "ic1-l15-12", lesson: 15, simplified: "休息", traditional: "休息", pinyin: "xiū xi", english: "to rest", sentence: "你应该多休息。", sentenceEnglish: "You should rest more." },
+
+  // ── Lesson 16: Dating ────────────────────────────────────────────────
+  { id: "ic1-l16-1", lesson: 16, simplified: "同", traditional: "同", pinyin: "tóng", english: "same; alike", sentence: "我们是同一个学校的。", sentenceEnglish: "We are from the same school." },
+  { id: "ic1-l16-2", lesson: 16, simplified: "印象", traditional: "印象", pinyin: "yìn xiàng", english: "impression", sentence: "他给我的印象很好。", sentenceEnglish: "He made a good impression on me." },
+  { id: "ic1-l16-3", lesson: 16, simplified: "约会", traditional: "約會", pinyin: "yuē huì", english: "date; appointment", sentence: "我今晚有一个约会。", sentenceEnglish: "I have a date tonight." },
+  { id: "ic1-l16-4", lesson: 16, simplified: "见面", traditional: "見面", pinyin: "jiàn miàn", english: "to meet up", sentence: "我们明天见面。", sentenceEnglish: "We'll meet up tomorrow." },
+  { id: "ic1-l16-5", lesson: 16, simplified: "记得", traditional: "記得", pinyin: "jì de", english: "to remember", sentence: "你记得他的名字吗？", sentenceEnglish: "Do you remember his name?" },
+  { id: "ic1-l16-6", lesson: 16, simplified: "城市", traditional: "城市", pinyin: "chéng shì", english: "city", sentence: "北京是个大城市。", sentenceEnglish: "Beijing is a big city." },
+  { id: "ic1-l16-7", lesson: 16, simplified: "电子", traditional: "電子", pinyin: "diàn zǐ", english: "electronic", sentence: "请给我你的电子邮件。", sentenceEnglish: "Please give me your email." },
+  { id: "ic1-l16-8", lesson: 16, simplified: "邮件", traditional: "郵件", pinyin: "yóu jiàn", english: "mail; email", sentence: "我给你发了一个邮件。", sentenceEnglish: "I sent you an email." },
+  { id: "ic1-l16-9", lesson: 16, simplified: "演", traditional: "演", pinyin: "yǎn", english: "to show (a film); to perform", sentence: "这个电影院在演什么？", sentenceEnglish: "What's showing at this cinema?" },
+  { id: "ic1-l16-10", lesson: 16, simplified: "成", traditional: "成", pinyin: "chéng", english: "to become; to succeed", sentence: "这件事成了。", sentenceEnglish: "This matter worked out." },
+  { id: "ic1-l16-11", lesson: 16, simplified: "希望", traditional: "希望", pinyin: "xī wàng", english: "to hope", sentence: "我希望明天不下雨。", sentenceEnglish: "I hope it won't rain tomorrow." },
+  { id: "ic1-l16-12", lesson: 16, simplified: "后来", traditional: "後來", pinyin: "hòu lái", english: "later; afterwards", sentence: "后来我们成了好朋友。", sentenceEnglish: "Later we became good friends." },
+
+  // ── Lesson 17: Renting an Apartment ──────────────────────────────────
+  { id: "ic1-l17-1", lesson: 17, simplified: "房子", traditional: "房子", pinyin: "fáng zi", english: "house", sentence: "这个房子很大。", sentenceEnglish: "This house is big." },
+  { id: "ic1-l17-2", lesson: 17, simplified: "干净", traditional: "乾淨", pinyin: "gān jìng", english: "clean", sentence: "这个房间很干净。", sentenceEnglish: "This room is clean." },
+  { id: "ic1-l17-3", lesson: 17, simplified: "安静", traditional: "安靜", pinyin: "ān jìng", english: "quiet", sentence: "这里很安静。", sentenceEnglish: "It's quiet here." },
+  { id: "ic1-l17-4", lesson: 17, simplified: "沙发", traditional: "沙發", pinyin: "shā fā", english: "sofa", sentence: "客厅里有一个沙发。", sentenceEnglish: "There's a sofa in the living room." },
+  { id: "ic1-l17-5", lesson: 17, simplified: "椅子", traditional: "椅子", pinyin: "yǐ zi", english: "chair", sentence: "这把椅子很舒服。", sentenceEnglish: "This chair is comfortable." },
+  { id: "ic1-l17-6", lesson: 17, simplified: "书架", traditional: "書架", pinyin: "shū jià", english: "bookshelf", sentence: "书架上有很多书。", sentenceEnglish: "There are many books on the bookshelf." },
+  { id: "ic1-l17-7", lesson: 17, simplified: "家具", traditional: "傢俱", pinyin: "jiā jù", english: "furniture", sentence: "这个房子有家具。", sentenceEnglish: "This house is furnished." },
+  { id: "ic1-l17-8", lesson: 17, simplified: "房租", traditional: "房租", pinyin: "fáng zū", english: "rent", sentence: "这里的房租很贵。", sentenceEnglish: "The rent here is expensive." },
+  { id: "ic1-l17-9", lesson: 17, simplified: "押金", traditional: "押金", pinyin: "yā jīn", english: "security deposit", sentence: "押金是一个月的房租。", sentenceEnglish: "The deposit is one month's rent." },
+  { id: "ic1-l17-10", lesson: 17, simplified: "允许", traditional: "允許", pinyin: "yǔn xǔ", english: "to allow", sentence: "这里不允许养宠物。", sentenceEnglish: "Pets are not allowed here." },
+  { id: "ic1-l17-11", lesson: 17, simplified: "宠物", traditional: "寵物", pinyin: "chǒng wù", english: "pet", sentence: "我想养一只宠物。", sentenceEnglish: "I want to have a pet." },
+  { id: "ic1-l17-12", lesson: 17, simplified: "厨房", traditional: "廚房", pinyin: "chú fáng", english: "kitchen", sentence: "厨房很干净。", sentenceEnglish: "The kitchen is clean." },
+
+  // ── Lesson 18: Sports ────────────────────────────────────────────────
+  { id: "ic1-l18-1", lesson: 18, simplified: "运动", traditional: "運動", pinyin: "yùn dòng", english: "sports; to exercise", sentence: "我每天做运动。", sentenceEnglish: "I exercise every day." },
+  { id: "ic1-l18-2", lesson: 18, simplified: "跑步", traditional: "跑步", pinyin: "pǎo bù", english: "to run; jogging", sentence: "我早上去跑步。", sentenceEnglish: "I go jogging in the morning." },
+  { id: "ic1-l18-3", lesson: 18, simplified: "网球", traditional: "網球", pinyin: "wǎng qiú", english: "tennis", sentence: "我们一起打网球吧。", sentenceEnglish: "Let's play tennis together." },
+  { id: "ic1-l18-4", lesson: 18, simplified: "篮球", traditional: "籃球", pinyin: "lán qiú", english: "basketball", sentence: "他很喜欢打篮球。", sentenceEnglish: "He really likes playing basketball." },
+  { id: "ic1-l18-5", lesson: 18, simplified: "游泳", traditional: "游泳", pinyin: "yóu yǒng", english: "to swim", sentence: "夏天我常常去游泳。", sentenceEnglish: "I often go swimming in summer." },
+  { id: "ic1-l18-6", lesson: 18, simplified: "足球", traditional: "足球", pinyin: "zú qiú", english: "soccer", sentence: "他们在踢足球。", sentenceEnglish: "They are playing soccer." },
+  { id: "ic1-l18-7", lesson: 18, simplified: "比赛", traditional: "比賽", pinyin: "bǐ sài", english: "match; competition", sentence: "今天有一场足球比赛。", sentenceEnglish: "There's a soccer match today." },
+  { id: "ic1-l18-8", lesson: 18, simplified: "简单", traditional: "簡單", pinyin: "jiǎn dān", english: "simple", sentence: "这个运动很简单。", sentenceEnglish: "This sport is simple." },
+  { id: "ic1-l18-9", lesson: 18, simplified: "危险", traditional: "危險", pinyin: "wēi xiǎn", english: "dangerous", sentence: "这个运动有点危险。", sentenceEnglish: "This sport is a bit dangerous." },
+  { id: "ic1-l18-10", lesson: 18, simplified: "愿意", traditional: "願意", pinyin: "yuàn yì", english: "to be willing", sentence: "我愿意跟你去。", sentenceEnglish: "I'm willing to go with you." },
+  { id: "ic1-l18-11", lesson: 18, simplified: "提高", traditional: "提高", pinyin: "tí gāo", english: "to improve; to raise", sentence: "我想提高我的中文。", sentenceEnglish: "I want to improve my Chinese." },
+  { id: "ic1-l18-12", lesson: 18, simplified: "水平", traditional: "水平", pinyin: "shuǐ píng", english: "level; standard", sentence: "他的中文水平很高。", sentenceEnglish: "His Chinese level is high." },
+
+  // ── Lesson 19: Travel ────────────────────────────────────────────────
+  { id: "ic1-l19-1", lesson: 19, simplified: "旅行", traditional: "旅行", pinyin: "lǚ xíng", english: "to travel", sentence: "我想去中国旅行。", sentenceEnglish: "I want to travel to China." },
+  { id: "ic1-l19-2", lesson: 19, simplified: "打算", traditional: "打算", pinyin: "dǎ suàn", english: "to plan", sentence: "暑假你打算做什么？", sentenceEnglish: "What do you plan to do this summer?" },
+  { id: "ic1-l19-3", lesson: 19, simplified: "护照", traditional: "護照", pinyin: "hù zhào", english: "passport", sentence: "出国旅行需要护照。", sentenceEnglish: "You need a passport to travel abroad." },
+  { id: "ic1-l19-4", lesson: 19, simplified: "签证", traditional: "簽證", pinyin: "qiān zhèng", english: "visa", sentence: "我要办一个签证。", sentenceEnglish: "I need to get a visa." },
+  { id: "ic1-l19-5", lesson: 19, simplified: "机票", traditional: "機票", pinyin: "jī piào", english: "plane ticket", sentence: "我买了一张机票。", sentenceEnglish: "I bought a plane ticket." },
+  { id: "ic1-l19-6", lesson: 19, simplified: "旅行社", traditional: "旅行社", pinyin: "lǚ xíng shè", english: "travel agency", sentence: "我在旅行社订了机票。", sentenceEnglish: "I booked a ticket at the travel agency." },
+  { id: "ic1-l19-7", lesson: 19, simplified: "订", traditional: "訂", pinyin: "dìng", english: "to book; to reserve", sentence: "我要订一个房间。", sentenceEnglish: "I want to book a room." },
+  { id: "ic1-l19-8", lesson: 19, simplified: "座位", traditional: "座位", pinyin: "zuò wèi", english: "seat", sentence: "我想要靠窗的座位。", sentenceEnglish: "I'd like a window seat." },
+  { id: "ic1-l19-9", lesson: 19, simplified: "直飞", traditional: "直飛", pinyin: "zhí fēi", english: "to fly directly", sentence: "这个航班直飞北京。", sentenceEnglish: "This flight goes directly to Beijing." },
+  { id: "ic1-l19-10", lesson: 19, simplified: "转机", traditional: "轉機", pinyin: "zhuǎn jī", english: "to change planes", sentence: "我要在东京转机。", sentenceEnglish: "I need to change planes in Tokyo." },
+  { id: "ic1-l19-11", lesson: 19, simplified: "减价", traditional: "減價", pinyin: "jiǎn jià", english: "to reduce prices", sentence: "这些机票减价了。", sentenceEnglish: "These tickets are on sale." },
+  { id: "ic1-l19-12", lesson: 19, simplified: "旅馆", traditional: "旅館", pinyin: "lǚ guǎn", english: "hotel", sentence: "我们住在一个旅馆。", sentenceEnglish: "We are staying in a hotel." },
+
+  // ── Lesson 20: At the Airport ────────────────────────────────────────
+  { id: "ic1-l20-1", lesson: 20, simplified: "行李", traditional: "行李", pinyin: "xíng li", english: "luggage", sentence: "我的行李很重。", sentenceEnglish: "My luggage is heavy." },
+  { id: "ic1-l20-2", lesson: 20, simplified: "出发", traditional: "出發", pinyin: "chū fā", english: "to set off; to depart", sentence: "我们明天早上出发。", sentenceEnglish: "We set off tomorrow morning." },
+  { id: "ic1-l20-3", lesson: 20, simplified: "登机牌", traditional: "登機牌", pinyin: "dēng jī pái", english: "boarding pass", sentence: "请给我你的登机牌。", sentenceEnglish: "Please give me your boarding pass." },
+  { id: "ic1-l20-4", lesson: 20, simplified: "起飞", traditional: "起飛", pinyin: "qǐ fēi", english: "to take off (plane)", sentence: "飞机几点起飞？", sentenceEnglish: "What time does the plane take off?" },
+  { id: "ic1-l20-5", lesson: 20, simplified: "接", traditional: "接", pinyin: "jiē", english: "to pick up (someone)", sentence: "我去机场接你。", sentenceEnglish: "I'll pick you up at the airport." },
+  { id: "ic1-l20-6", lesson: 20, simplified: "表哥", traditional: "表哥", pinyin: "biǎo gē", english: "older male cousin", sentence: "我表哥来机场接我。", sentenceEnglish: "My cousin came to pick me up at the airport." },
+  { id: "ic1-l20-7", lesson: 20, simplified: "停车场", traditional: "停車場", pinyin: "tíng chē chǎng", english: "parking lot", sentence: "停车场在那边。", sentenceEnglish: "The parking lot is over there." },
+  { id: "ic1-l20-8", lesson: 20, simplified: "欢迎", traditional: "歡迎", pinyin: "huān yíng", english: "to welcome", sentence: "欢迎你来北京！", sentenceEnglish: "Welcome to Beijing!" },
+  { id: "ic1-l20-9", lesson: 20, simplified: "叔叔", traditional: "叔叔", pinyin: "shū shu", english: "uncle", sentence: "这是我叔叔。", sentenceEnglish: "This is my uncle." },
+  { id: "ic1-l20-10", lesson: 20, simplified: "阿姨", traditional: "阿姨", pinyin: "ā yí", english: "aunt", sentence: "阿姨对我很好。", sentenceEnglish: "My aunt is very kind to me." },
+  { id: "ic1-l20-11", lesson: 20, simplified: "瘦", traditional: "瘦", pinyin: "shòu", english: "thin; slim", sentence: "你最近瘦了。", sentenceEnglish: "You've lost weight recently." },
+  { id: "ic1-l20-12", lesson: 20, simplified: "关心", traditional: "關心", pinyin: "guān xīn", english: "to care about", sentence: "谢谢你的关心。", sentenceEnglish: "Thank you for your concern." },
+];

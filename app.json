@@ -1,0 +1,24 @@
+{
+  "expo": {
+    "name": "Chinese Flashcards",
+    "slug": "chinese-flashcards",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "chineseflashcards",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#0f172a"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.example.chineseflashcards"
+    },
+    "android": {
+      "package": "com.example.chineseflashcards"
+    },
+    "web": {
+      "bundler": "metro"
+    }
+  }
+}
