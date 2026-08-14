@@ -28,6 +28,13 @@ export function WriteScreen({ deck }: Props) {
   const card = deck[index];
   const chars = card ? splitChars(card.simplified) : [];
   const character = chars[charPos] ?? "";
+  // Per-character pinyin syllables (space-separated in the data). Fall back to
+  // a position number if the syllable count doesn't line up with the chars.
+  const syllables = card ? card.pinyin.trim().split(/\s+/) : [];
+  const chipLabels =
+    syllables.length === chars.length
+      ? syllables
+      : chars.map((_, i) => String(i + 1));
 
   useEffect(() => {
     setReady(false);
@@ -67,7 +74,7 @@ export function WriteScreen({ deck }: Props) {
                   i === charPos && styles.chipTextActive,
                 ]}
               >
-                {c}
+                {chipLabels[i]}
               </Text>
             </Pressable>
           ))}
@@ -168,8 +175,9 @@ const styles = StyleSheet.create({
     marginBottom: spacing.md,
   },
   chip: {
-    width: 44,
+    minWidth: 44,
     height: 44,
+    paddingHorizontal: spacing.md,
     borderRadius: radius.sm,
     backgroundColor: colors.surface,
     borderWidth: 1,
@@ -183,7 +191,7 @@ const styles = StyleSheet.create({
   },
   chipText: {
     color: colors.textMuted,
-    fontSize: 24,
+    fontSize: 18,
   },
   chipTextActive: {
     color: colors.text,
