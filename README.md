@@ -70,12 +70,15 @@ src/
   data/integratedChinese1.ts       Integrated Chinese L1 Part 1 (Lessons 1–10)
   data/integratedChinese1Part2.ts  Integrated Chinese L1 Part 2 (Lessons 11–20)
   data/starterDeck.ts       Small fallback sample deck
+  data/strokeData.json      Bundled offline stroke data (generated)
+  data/hanziWriterLib.json  Inlined Hanzi Writer library (generated)
   components/Flashcard.tsx  Animated flip card
   components/StrokeWriter.tsx  Hanzi Writer WebView (animate + quiz)
   screens/StudyScreen.tsx   Study mode
   screens/WriteScreen.tsx   Stroke-order animation + quiz validation
   screens/BrowseScreen.tsx  Deck list + delete
   screens/AddCardScreen.tsx Add-card form
+scripts/genStrokeData.mjs   Regenerates the two bundled data files above
 ```
 
 ## Notes
@@ -83,11 +86,42 @@ src/
 - Audio pronunciation relies on the device's Mandarin text-to-speech voice. On a
   real iPhone this works out of the box; if you hear nothing, ensure a Chinese
   voice is available under iOS Settings → Accessibility → Spoken Content → Voices.
-- Stroke-order animation and quiz validation use **Hanzi Writer**, whose
-  character stroke data streams from a CDN — the phone must be online for the
-  Write tab. Everything else works offline.
+- Stroke-order animation and quiz validation use **Hanzi Writer**. Both the
+  library and the stroke data for every character in the deck are **bundled into
+  the app** (see `src/data/strokeData.json` and `hanziWriterLib.json`), so the
+  Write tab works fully offline. Regenerate them with `npm run gen:strokes`
+  after adding new characters to the deck (uses the `hanzi-writer` and
+  `hanzi-writer-data` dev dependencies). Characters not in the bundle fall back
+  to the CDN when online.
 - The default deck covers **Integrated Chinese, Level 1 (Lessons 1–20)** — the
   full Part 1 + Part 2 vocabulary (~319 cards). To restore it after edits, the
   deck hook exposes `resetToStarter()`.
-- To ship to the App Store later, use `eas build` (requires an Apple Developer
-  account). Development/testing needs only Expo Go.
+
+## Running standalone / offline (EAS Build)
+
+Expo Go loads the JS bundle live from the Metro server on your PC, so in dev the
+app **stops working when the server is down**. To get a standalone app that runs
+on your phone with no PC and works offline, build it with EAS:
+
+1. Create a free account at https://expo.dev, then log in:
+   ```powershell
+   npx eas login
+   ```
+2. Link the project (creates an EAS project id in `app.json`):
+   ```powershell
+   npx eas init
+   ```
+3. Build an installable app (`eas.json` defines the profiles):
+   ```powershell
+   # iOS – needs an Apple Developer account; installs via TestFlight or ad-hoc
+   npx eas build --profile preview --platform ios
+
+   # Android – produces a standalone APK, no account needed
+   npx eas build --profile preview --platform android
+   ```
+4. Install the resulting build on your device. It launches on its own and, once
+   opened, runs **fully offline** — Study, audio (device TTS), the deck, and the
+   Write tab (stroke data is bundled).
+
+For App Store distribution, use the `production` profile plus `eas submit`.
+

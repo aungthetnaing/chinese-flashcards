@@ -2,7 +2,12 @@ import { forwardRef, useImperativeHandle, useMemo, useRef } from "react";
 import { StyleSheet, View } from "react-native";
 import { WebView, WebViewMessageEvent } from "react-native-webview";
 
+import strokeData from "../data/strokeData.json";
+import hanziWriterLib from "../data/hanziWriterLib.json";
 import { colors } from "../theme";
+
+const STROKE_DATA = strokeData as Record<string, unknown>;
+const HW_LIB = (hanziWriterLib as { lib: string }).lib;
 
 interface Props {
   /** A single Chinese character to practice. */
@@ -21,18 +26,24 @@ export interface StrokeWriterHandle {
 
 function buildHtml(character: string, size: number): string {
   const safeChar = JSON.stringify(character);
+  // Embed bundled stroke data for this character so the Write tab works
+  // offline; fall back to the CDN only if the character isn't bundled.
+  const bundled = STROKE_DATA[character];
+  const safeData = JSON.stringify(bundled ?? null);
   return `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 <style>
-  html, body { margin: 0; padding: 0; background: ${colors.surfaceAlt}; }
-  #wrap { display: flex; justify-content: center; align-items: center; height: 100vh; }
-  #target { background: ${colors.surfaceAlt}; }
+  html, body { margin: 0; padding: 0; background: ${colors.surfaceAlt}; overflow: hidden; }
+  * { -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+  #wrap { display: flex; justify-content: center; align-items: center; height: 100vh; touch-action: none; }
+  #target { background: ${colors.surfaceAlt}; touch-action: none; }
+  #target svg { touch-action: none; }
   .grid { stroke: ${colors.border}; stroke-width: 1; }
 </style>
-<script src="https://cdn.jsdelivr.net/npm/hanzi-writer@3.5/dist/hanzi-writer.min.js"></script>
+<script>${HW_LIB.replace(/<\/script/gi, "<\\/script")}</script>
 </head>
 <body>
   <div id="wrap"><div id="target"></div></div>
@@ -41,6 +52,7 @@ function buildHtml(character: string, size: number): string {
     function post(obj) { if (RN) { RN.postMessage(JSON.stringify(obj)); } }
     var size = ${size};
     var writer = null;
+    var CHAR_DATA = ${safeData};
 
     function makeGrid(svg) {
       var ns = "http://www.w3.org/2000/svg";
@@ -75,6 +87,7 @@ function buildHtml(character: string, size: number): string {
         strokeAnimationSpeed: 1,
         delayBetweenStrokes: 250,
         charDataLoader: function (ch, onComplete) {
+          if (CHAR_DATA) { onComplete(CHAR_DATA); return; }
           fetch("https://cdn.jsdelivr.net/npm/hanzi-writer-data@2.0/" + ch + ".json")
             .then(function (r) { return r.json(); })
             .then(onComplete)
@@ -184,6 +197,8 @@ export const StrokeWriter = forwardRef<StrokeWriterHandle, Props>(
           source={{ html }}
           style={styles.web}
           scrollEnabled={false}
+          bounces={false}
+          overScrollMode="never"
           onMessage={onMessage}
           javaScriptEnabled
           domStorageEnabled
