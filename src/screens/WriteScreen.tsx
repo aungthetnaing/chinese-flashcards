@@ -18,14 +18,31 @@ function splitChars(word: string): string[] {
   return Array.from(word).filter((c) => /\p{Script=Han}/u.test(c));
 }
 
+/** Fisher-Yates shuffle returning a new array. */
+function shuffle<T>(items: T[]): T[] {
+  const next = [...items];
+  for (let i = next.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [next[i], next[j]] = [next[j], next[i]];
+  }
+  return next;
+}
+
 export function WriteScreen({ deck }: Props) {
+  const [order, setOrder] = useState<FlashcardType[]>(deck);
   const [index, setIndex] = useState(0);
   const [charPos, setCharPos] = useState(0);
-  const [status, setStatus] = useState<string>("Loading character…");
+  const [status, setStatus] = useState<string>("Loading character\u2026");
   const [ready, setReady] = useState(false);
   const writerRef = useRef<StrokeWriterHandle>(null);
 
-  const card = deck[index];
+  useEffect(() => {
+    setOrder(deck);
+    setIndex(0);
+    setCharPos(0);
+  }, [deck]);
+
+  const card = order[index];
   const chars = card ? splitChars(card.simplified) : [];
   const character = chars[charPos] ?? "";
   // Per-character pinyin syllables (space-separated in the data). Fall back to
@@ -51,7 +68,13 @@ export function WriteScreen({ deck }: Props) {
 
   const goCard = (delta: number) => {
     setCharPos(0);
-    setIndex((prev) => (prev + delta + deck.length) % deck.length);
+    setIndex((prev) => (prev + delta + order.length) % order.length);
+  };
+
+  const shuffleDeck = () => {
+    setOrder((prev) => shuffle(prev));
+    setCharPos(0);
+    setIndex(0);
   };
 
   return (
@@ -87,7 +110,8 @@ export function WriteScreen({ deck }: Props) {
         size={280}
         onReady={() => {
           setReady(true);
-          setStatus("Tap Animate to see stroke order, or Quiz to write it.");
+          setStatus("Write the strokes in order…");
+          writerRef.current?.quiz();
         }}
         onCorrectStroke={(_stroke, remaining) =>
           setStatus(
@@ -134,15 +158,17 @@ export function WriteScreen({ deck }: Props) {
         </Pressable>
         <Pressable
           style={[styles.button, styles.secondary]}
+          onPress={shuffleDeck}
+        >
+          <Text style={styles.buttonText}>Shuffle</Text>
+        </Pressable>
+        <Pressable
+          style={[styles.button, styles.secondary]}
           onPress={() => goCard(1)}
         >
           <Text style={styles.buttonText}>Next ›</Text>
         </Pressable>
       </View>
-
-      <Text style={styles.helper}>
-        Stroke data streams from the Hanzi Writer CDN, so keep the phone online.
-      </Text>
     </View>
   );
 }
