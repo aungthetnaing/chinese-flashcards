@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Flashcard } from "../components/Flashcard";
 import { colors, radius, spacing } from "../theme";
 import { Flashcard as FlashcardType } from "../types";
@@ -12,7 +12,20 @@ export function StudyScreen({ deck }: Props) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState<Set<string>>(new Set());
+  const [category, setCategory] = useState("All topics");
+  const categories = useMemo(
+    () => ["All topics", ...Array.from(new Set(deck.map((card) => card.category))).sort()],
+    [deck],
+  );
   useEffect(() => { setOrder(deck); setIndex(0); setFlipped(false); }, [deck]);
+  useEffect(() => {
+    const next = category === "All topics"
+      ? deck
+      : deck.filter((card) => card.category === category);
+    setOrder(next);
+    setIndex(0);
+    setFlipped(false);
+  }, [category, deck]);
   const current = order[index];
   const progress = useMemo(() => order.length ? `${index + 1} / ${order.length}` : "0 / 0", [index, order.length]);
   if (!current) return <View style={styles.empty}><Text style={styles.emptyTitle}>Your deck is empty</Text><Text style={styles.emptyText}>Add a card from the Add tab.</Text></View>;
@@ -22,6 +35,23 @@ export function StudyScreen({ deck }: Props) {
   };
   return (
     <View style={styles.container}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.categoryRow}
+      >
+        {categories.map((item) => (
+          <Pressable
+            key={item}
+            style={[styles.categoryChip, category === item && styles.categoryChipActive]}
+            onPress={() => setCategory(item)}
+          >
+            <Text style={[styles.categoryText, category === item && styles.categoryTextActive]}>
+              {item}
+            </Text>
+          </Pressable>
+        ))}
+      </ScrollView>
       <View style={styles.stats}><Text style={styles.progress}>{progress}</Text><Text style={styles.known}>{known.size} mastered</Text></View>
       <Flashcard card={current} flipped={flipped} onFlip={() => setFlipped((value) => !value)} />
       {flipped && <View style={styles.rating}><Text style={styles.ratingLabel}>How well did you know it?</Text><View style={styles.ratingRow}><Pressable style={[styles.ratingButton, styles.review]} onPress={() => next()}><Text style={styles.buttonText}>Review again</Text></Pressable><Pressable style={[styles.ratingButton, styles.mastered]} onPress={() => next(true)}><Text style={styles.buttonText}>Got it</Text></Pressable></View></View>}
@@ -33,6 +63,11 @@ export function StudyScreen({ deck }: Props) {
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: spacing.lg, justifyContent: "center" },
+  categoryRow: { gap: spacing.sm, paddingBottom: spacing.md },
+  categoryChip: { paddingHorizontal: spacing.md, paddingVertical: spacing.sm, borderRadius: radius.md, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
+  categoryChipActive: { backgroundColor: colors.primary, borderColor: colors.primary },
+  categoryText: { color: colors.textMuted, fontSize: 12, fontWeight: "700" },
+  categoryTextActive: { color: colors.text },
   stats: { flexDirection: "row", justifyContent: "space-between", marginBottom: spacing.md },
   progress: { color: colors.textMuted, fontSize: 15, fontWeight: "700" },
   known: { color: colors.success, fontSize: 15, fontWeight: "700" },

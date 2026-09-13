@@ -1,36 +1,36 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { STARTER_DECK } from "./data/starterDeck";
 import { loadDeck, saveDeck } from "./storage";
 import { Flashcard, NewFlashcard } from "./types";
+import { getEvent } from "./data/events";
 
 function makeId(): string {
   return `card-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
 }
 
-export function useDeck() {
+export function useDeck(eventId = "disease-detectives") {
   const [deck, setDeck] = useState<Flashcard[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     let active = true;
     (async () => {
-      const stored = await loadDeck();
+      const stored = await loadDeck(eventId);
       if (!active) {
         return;
       }
-      setDeck(stored ?? STARTER_DECK);
+      setDeck(stored ?? getEvent(eventId).starterDeck);
       setLoading(false);
     })();
     return () => {
       active = false;
     };
-  }, []);
+  }, [eventId]);
 
   const persist = useCallback((next: Flashcard[]) => {
     setDeck(next);
-    void saveDeck(next);
-  }, []);
+    void saveDeck(next, eventId);
+  }, [eventId]);
 
   const addCard = useCallback(
     (card: NewFlashcard) => {
@@ -47,8 +47,8 @@ export function useDeck() {
   );
 
   const resetToStarter = useCallback(() => {
-    persist(STARTER_DECK);
-  }, [persist]);
+    persist(getEvent(eventId).starterDeck);
+  }, [eventId, persist]);
 
   return { deck, loading, addCard, removeCard, resetToStarter };
 }

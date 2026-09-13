@@ -1,13 +1,16 @@
-# Disease Detectives Flashcards
+# SciOly Flashcards
 
-An offline-first iPhone study app for Science Olympiad Disease Detectives,
+An offline-first iPhone study app for Science Olympiad biology events,
 built with Expo, React Native, and TypeScript.
 
 ## Included
 
-- 300 cards covering epidemiology foundations, outbreak investigation, study
-  design, bias, statistics, surveillance, transmission, immunity, prevention,
-  and causation.
+- A SciOly event picker with a dedicated Disease Detectives subsection.
+- 300 Disease Detectives cards covering epidemiology foundations, outbreak
+  investigation, study design, bias, statistics, surveillance, transmission,
+  immunity, prevention, and causation.
+- Disease Detectives study filters for every subcategory or a full-deck shuffle
+  through **All topics**.
 - Flip cards with a question-first study flow.
 - Shuffle, previous/next, and “Review again” / “Got it” controls.
 - Searchable card library with topic labels.
@@ -16,7 +19,7 @@ built with Expo, React Native, and TypeScript.
 - Portrait iPhone layout with native React Native controls and dark, high-contrast
   styling.
 
-The starter cards are based on the Disease Detectives wiki material and the
+The Disease Detectives cards are based on the Disease Detectives wiki material and the
 past-year discussion and Question Marathon topics linked from the Scioly.org
 event thread. They are study prompts, not a replacement for the current
 Science Olympiad rules or official event resources.
@@ -43,14 +46,17 @@ off:
    the build through TestFlight. An Apple Developer account is required for
    iOS device distribution.
 
-The preview build bundles the card data and app code. Study, Cards, Add, and
-on-device AsyncStorage persistence work without a network connection.
+The preview build bundles the card data and app code. Events, Study, Cards, Add,
+subcategory filters, and on-device AsyncStorage persistence work without a
+network connection.
 
 ## Project structure
 
 ```text
 App.tsx                         App shell and tab navigation
+src/data/events.ts              SciOly event registry and event subsections
 src/data/starterDeck.ts         Disease Detectives starter cards
+src/screens/EventsScreen.tsx    Biology event picker
 src/screens/StudyScreen.tsx    Flip-card study mode
 src/screens/BrowseScreen.tsx   Search and manage cards
 src/screens/AddCardScreen.tsx  Create custom cards

@@ -1,21 +1,21 @@
 {
   "expo": {
-    "name": "Disease Detectives",
-    "slug": "disease-detectives",
+    "name": "SciOly",
+    "slug": "scioly",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "scheme": "diseasedetectives",
+    "scheme": "scioly",
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#0f172a"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.example.diseasedetectives"
+      "bundleIdentifier": "com.example.scioly"
     },
     "android": {
-      "package": "com.example.diseasedetectives"
+      "package": "com.example.scioly"
     },
     "web": {
       "bundler": "metro"
