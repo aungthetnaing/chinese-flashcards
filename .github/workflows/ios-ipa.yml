@@ -49,7 +49,7 @@ jobs:
         run: |
           WORKSPACE=$(ls -d *.xcworkspace | head -n1)
           SCHEME=$(xcodebuild -list -workspace "$WORKSPACE" -json \
-            | python3 -c "import json,sys; print(json.load(sys.stdin)['workspace']['schemes'][0])")
+            | python3 -c "import json,sys; schemes=json.load(sys.stdin)['workspace']['schemes']; print(next((s for s in schemes if s == 'SciOly'), next((s for s in schemes if not s.startswith('Pods-') and s != 'EXConstants'), schemes[0])))")
           echo "workspace=$WORKSPACE" >> "$GITHUB_OUTPUT"
           echo "scheme=$SCHEME" >> "$GITHUB_OUTPUT"
           echo "Using workspace=$WORKSPACE scheme=$SCHEME"
@@ -72,7 +72,8 @@ jobs:
       - name: Package unsigned IPA
         working-directory: ios
         run: |
-          APP=$(ls -d build/App.xcarchive/Products/Applications/*.app | head -n1)
+          APP=$(find build/App.xcarchive/Products/Applications -maxdepth 1 -name '*.app' -print -quit)
+          test -n "$APP"
           mkdir -p build/Payload
           cp -R "$APP" build/Payload/
           (cd build && zip -qry app-unsigned.ipa Payload)
@@ -81,6 +82,6 @@ jobs:
       - name: Upload IPA artifact
         uses: actions/upload-artifact@v4
         with:
-          name: chinese-flashcards-unsigned-ipa
+          name: scioly-unsigned-ipa
           path: ios/build/app-unsigned.ipa
           if-no-files-found: error
