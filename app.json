@@ -1,21 +1,21 @@
 {
   "expo": {
-    "name": "Chinese Flashcards",
-    "slug": "chinese-flashcards",
+    "name": "Disease Detectives",
+    "slug": "disease-detectives",
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
-    "scheme": "chineseflashcards",
+    "scheme": "diseasedetectives",
     "splash": {
       "resizeMode": "contain",
       "backgroundColor": "#0f172a"
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.example.chineseflashcards"
+      "bundleIdentifier": "com.example.diseasedetectives"
     },
     "android": {
-      "package": "com.example.chineseflashcards"
+      "package": "com.example.diseasedetectives"
     },
     "web": {
       "bundler": "metro"

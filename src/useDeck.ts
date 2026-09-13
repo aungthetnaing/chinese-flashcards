@@ -1,15 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { INTEGRATED_CHINESE_1 } from "./data/integratedChinese1";
-import { INTEGRATED_CHINESE_1_PART2 } from "./data/integratedChinese1Part2";
+import { STARTER_DECK } from "./data/starterDeck";
 import { loadDeck, saveDeck } from "./storage";
 import { Flashcard, NewFlashcard } from "./types";
-
-/** Full Integrated Chinese Level 1 deck (Part 1 + Part 2, Lessons 1–20). */
-const DEFAULT_DECK: Flashcard[] = [
-  ...INTEGRATED_CHINESE_1,
-  ...INTEGRATED_CHINESE_1_PART2,
-];
 
 function makeId(): string {
   return `card-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
@@ -26,7 +19,7 @@ export function useDeck() {
       if (!active) {
         return;
       }
-      setDeck(stored ?? DEFAULT_DECK);
+      setDeck(stored ?? STARTER_DECK);
       setLoading(false);
     })();
     return () => {
@@ -54,7 +47,7 @@ export function useDeck() {
   );
 
   const resetToStarter = useCallback(() => {
-    persist(DEFAULT_DECK);
+    persist(STARTER_DECK);
   }, [persist]);
 
   return { deck, loading, addCard, removeCard, resetToStarter };

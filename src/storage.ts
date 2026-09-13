@@ -2,7 +2,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { Flashcard } from "./types";
 
-const STORAGE_KEY = "@chinese-flashcards/deck";
+const STORAGE_KEY = "@disease-detectives/deck";
 
 export async function loadDeck(): Promise<Flashcard[] | null> {
   try {

@@ -1,127 +1,59 @@
-# 中文 Chinese Flashcards
+# Disease Detectives Flashcards
 
-An iPhone (and Android) app to study Chinese vocabulary. Each flashcard shows the
-**Simplified** and **Traditional** characters, **Pinyin**, **English** meaning, and
-an **example sentence** with its translation.
+An offline-first iPhone study app for Science Olympiad Disease Detectives,
+built with Expo, React Native, and TypeScript.
 
-Built with **Expo + React Native + TypeScript**, so you can develop it on Windows
-and run it on your real iPhone using the free **Expo Go** app.
+## Included
 
-## Features
+- 300 cards covering epidemiology foundations, outbreak investigation, study
+  design, bias, statistics, surveillance, transmission, immunity, prevention,
+  and causation.
+- Flip cards with a question-first study flow.
+- Shuffle, previous/next, and “Review again” / “Got it” controls.
+- Searchable card library with topic labels.
+- Add custom question-and-answer cards.
+- On-device persistence with AsyncStorage.
+- Portrait iPhone layout with native React Native controls and dark, high-contrast
+  styling.
 
-- Flip-card study mode (tap a card to reveal pinyin, English, and an example sentence)
-- Next / Previous / Shuffle controls
-- Simplified **and** Traditional characters on every card
-- **Audio pronunciation** — tap 🔊 to hear the word or sentence spoken in Mandarin
-  (uses the device's built-in text-to-speech via `expo-speech`)
-- **Stroke-order practice** — a "Write" tab powered by [Hanzi Writer](https://hanziwriter.org):
-  - **Animate** shows the correct stroke order for the character
-  - **Quiz** lets you write each stroke with your finger and validates stroke
-    order in real time, counting mistakes
-  - Multi-character words show a chip for each character to practice individually
-- **Preloaded deck: Integrated Chinese, Level 1 (Lessons 1–20, ~319 words)** —
-  the complete Level 1 vocabulary (Part 1 + Part 2) with simplified, traditional,
-  pinyin, English, and example sentences
-- Add your own cards; browse and delete cards
-- Cards are saved on-device (AsyncStorage) and reload on next launch
+The starter cards are based on the Disease Detectives wiki material and the
+past-year discussion and Question Marathon topics linked from the Scioly.org
+event thread. They are study prompts, not a replacement for the current
+Science Olympiad rules or official event resources.
 
-## Run and test on your iPhone
+## Run on an iPhone
 
-1. Install **Node.js** (LTS) on Windows if you don't have it.
-2. In this folder, install dependencies (only needed once):
-   ```powershell
-   npm install
-   ```
-3. Start the dev server:
-   ```powershell
-   npm start
-   ```
-   A QR code appears in the terminal (press `w`/`a`/`i` for other targets).
-4. On your iPhone, install **Expo Go** from the App Store.
-5. Make sure your iPhone and PC are on the **same Wi-Fi network**.
-6. Open the **Camera** app on the iPhone and point it at the QR code, then tap
-   the "Open in Expo Go" banner. The app loads live on your phone.
-7. Test each feature:
-   - **Study** tab → tap a card to flip; tap 🔊 to hear pronunciation.
-   - **Write** tab → tap **Animate** to see stroke order, or **Quiz** to write
-     the character stroke-by-stroke and get validation. (Keep the phone online —
-     stroke data streams from the Hanzi Writer CDN.)
-   - **Deck** tab → browse/delete; **Add** tab → create your own card.
-8. Edit any file and save — Expo hot-reloads the app on your phone instantly.
+1. Install Node.js LTS and run `npm install`.
+2. Start Expo with `npm start`.
+3. Install **Expo Go** on the iPhone.
+4. Put the iPhone and development computer on the same Wi-Fi network.
+5. Scan the terminal QR code with the iPhone Camera and open it in Expo Go.
 
-### Tips
+### Fully offline iPhone install
 
-- If the QR won't connect (e.g. corporate/campus Wi-Fi blocks it), run
-  `npx expo start --tunnel` to route through Expo's servers.
-- If you hear no audio, enable a Chinese voice under iOS **Settings →
-  Accessibility → Spoken Content → Voices → Chinese**.
+Expo Go is useful for development, but it loads the JavaScript bundle from the
+development server. For an app that works with Wi-Fi and cellular data turned
+off:
+
+1. Create or sign in to an account at https://expo.dev.
+2. Install the EAS CLI with `npm install -g eas-cli`.
+3. Run `eas login` in this project.
+4. Run `eas build --profile preview --platform ios`.
+5. Open the completed build link on the iPhone and install it, or distribute
+   the build through TestFlight. An Apple Developer account is required for
+   iOS device distribution.
+
+The preview build bundles the card data and app code. Study, Cards, Add, and
+on-device AsyncStorage persistence work without a network connection.
 
 ## Project structure
 
+```text
+App.tsx                         App shell and tab navigation
+src/data/starterDeck.ts         Disease Detectives starter cards
+src/screens/StudyScreen.tsx    Flip-card study mode
+src/screens/BrowseScreen.tsx   Search and manage cards
+src/screens/AddCardScreen.tsx  Create custom cards
+src/components/Flashcard.tsx   Animated question/answer card
+src/useDeck.ts                  Deck state and persistence
 ```
-App.tsx                     App shell + bottom tab navigation
-index.ts                    Expo entry point
-src/
-  types.ts                  Flashcard data model
-  theme.ts                  Colors / spacing tokens
-  storage.ts                AsyncStorage load/save
-  speech.ts                 Mandarin text-to-speech helper
-  useDeck.ts                Deck state hook (add/remove/persist)
-  data/integratedChinese1.ts       Integrated Chinese L1 Part 1 (Lessons 1–10)
-  data/integratedChinese1Part2.ts  Integrated Chinese L1 Part 2 (Lessons 11–20)
-  data/starterDeck.ts       Small fallback sample deck
-  data/strokeData.json      Bundled offline stroke data (generated)
-  data/hanziWriterLib.json  Inlined Hanzi Writer library (generated)
-  components/Flashcard.tsx  Animated flip card
-  components/StrokeWriter.tsx  Hanzi Writer WebView (animate + quiz)
-  screens/StudyScreen.tsx   Study mode
-  screens/WriteScreen.tsx   Stroke-order animation + quiz validation
-  screens/BrowseScreen.tsx  Deck list + delete
-  screens/AddCardScreen.tsx Add-card form
-scripts/genStrokeData.mjs   Regenerates the two bundled data files above
-```
-
-## Notes
-
-- Audio pronunciation relies on the device's Mandarin text-to-speech voice. On a
-  real iPhone this works out of the box; if you hear nothing, ensure a Chinese
-  voice is available under iOS Settings → Accessibility → Spoken Content → Voices.
-- Stroke-order animation and quiz validation use **Hanzi Writer**. Both the
-  library and the stroke data for every character in the deck are **bundled into
-  the app** (see `src/data/strokeData.json` and `hanziWriterLib.json`), so the
-  Write tab works fully offline. Regenerate them with `npm run gen:strokes`
-  after adding new characters to the deck (uses the `hanzi-writer` and
-  `hanzi-writer-data` dev dependencies). Characters not in the bundle fall back
-  to the CDN when online.
-- The default deck covers **Integrated Chinese, Level 1 (Lessons 1–20)** — the
-  full Part 1 + Part 2 vocabulary (~319 cards). To restore it after edits, the
-  deck hook exposes `resetToStarter()`.
-
-## Running standalone / offline (EAS Build)
-
-Expo Go loads the JS bundle live from the Metro server on your PC, so in dev the
-app **stops working when the server is down**. To get a standalone app that runs
-on your phone with no PC and works offline, build it with EAS:
-
-1. Create a free account at https://expo.dev, then log in:
-   ```powershell
-   npx eas login
-   ```
-2. Link the project (creates an EAS project id in `app.json`):
-   ```powershell
-   npx eas init
-   ```
-3. Build an installable app (`eas.json` defines the profiles):
-   ```powershell
-   # iOS – needs an Apple Developer account; installs via TestFlight or ad-hoc
-   npx eas build --profile preview --platform ios
-
-   # Android – produces a standalone APK, no account needed
-   npx eas build --profile preview --platform android
-   ```
-4. Install the resulting build on your device. It launches on its own and, once
-   opened, runs **fully offline** — Study, audio (device TTS), the deck, and the
-   Write tab (stroke data is bundled).
-
-For App Store distribution, use the `production` profile plus `eas submit`.
-
