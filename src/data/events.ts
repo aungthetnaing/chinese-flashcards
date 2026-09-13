@@ -1,6 +1,7 @@
 import { STARTER_DECK } from "./starterDeck";
 import { DESIGNER_GENES_DECK } from "./designerGenesDeck";
 import { ANATOMY_PHYSIOLOGY_DECK } from "./anatomyPhysiologyDeck";
+import { CHEMISTRY_LAB_DECK } from "./chemistryLabDeck";
 import { Flashcard } from "../types";
 
 export interface SciOlyEvent {
@@ -49,6 +50,15 @@ export const SCIOLY_EVENTS: SciOlyEvent[] = [
     color: "#a78bfa",
     available: false,
     starterDeck: [],
+  },
+  {
+    id: "chemistry-lab",
+    name: "Chemistry Lab",
+    division: "Chemistry · Division C",
+    description: "Laboratory chemistry, stoichiometry, reactions, solutions, and analysis.",
+    color: "#f59e0b",
+    available: true,
+    starterDeck: CHEMISTRY_LAB_DECK,
   },
 ];
 

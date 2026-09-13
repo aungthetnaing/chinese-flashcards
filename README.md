@@ -11,6 +11,9 @@ built with Expo, React Native, and TypeScript.
 - An Anatomy & Physiology subsection with 121 cards based on the official
   Science Olympiad event pages, OpenStax Anatomy and Physiology, and
   supplemental Scioly.org Question Marathon prompts.
+- A Chemistry Lab subsection with 120 cards based on the official Chem Lab
+  event page, the Scioly.org Chemistry Lab reference, OpenStax Chemistry, and
+  supplemental Question Marathon/forum prompts.
 - 300 Disease Detectives cards covering epidemiology foundations, outbreak
   investigation, study design, bias, statistics, surveillance, transmission,
   immunity, prevention, and causation.
