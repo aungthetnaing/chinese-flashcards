@@ -1,5 +1,6 @@
 import { STARTER_DECK } from "./starterDeck";
 import { DESIGNER_GENES_DECK } from "./designerGenesDeck";
+import { ANATOMY_PHYSIOLOGY_DECK } from "./anatomyPhysiologyDeck";
 import { Flashcard } from "../types";
 
 export interface SciOlyEvent {
@@ -34,11 +35,11 @@ export const SCIOLY_EVENTS: SciOlyEvent[] = [
   {
     id: "anatomy-physiology",
     name: "Anatomy & Physiology",
-    division: "Biology",
-    description: "A future deck for body systems, structures, and physiology.",
+    division: "Biology · Division B/C",
+    description: "Human body systems, structure-function relationships, and physiology.",
     color: "#38bdf8",
-    available: false,
-    starterDeck: [],
+    available: true,
+    starterDeck: ANATOMY_PHYSIOLOGY_DECK,
   },
   {
     id: "cell-biology",

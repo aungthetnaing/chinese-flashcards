@@ -8,6 +8,9 @@ built with Expo, React Native, and TypeScript.
 - A SciOly event picker with a dedicated Disease Detectives subsection.
 - A Designer Genes subsection with 145 genetics, inheritance, and biotechnology
   cards expanded from forum Question Marathons and study discussions.
+- An Anatomy & Physiology subsection with 121 cards based on the official
+  Science Olympiad event pages, OpenStax Anatomy and Physiology, and
+  supplemental Scioly.org Question Marathon prompts.
 - 300 Disease Detectives cards covering epidemiology foundations, outbreak
   investigation, study design, bias, statistics, surveillance, transmission,
   immunity, prevention, and causation.
