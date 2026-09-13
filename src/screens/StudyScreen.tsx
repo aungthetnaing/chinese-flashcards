@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Flashcard } from "../components/Flashcard";
 import { colors, radius, spacing } from "../theme";
@@ -13,15 +13,29 @@ export function StudyScreen({ deck }: Props) {
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState<Set<string>>(new Set());
   const [category, setCategory] = useState("All topics");
+  const shuffleAllAfterCategoryChange = useRef(false);
   const categories = useMemo(
     () => ["All topics", ...Array.from(new Set(deck.map((card) => card.category))).sort()],
     [deck],
   );
-  useEffect(() => { setOrder(deck); setIndex(0); setFlipped(false); }, [deck]);
+  useEffect(() => {
+    setOrder(deck);
+    setIndex(0);
+    setFlipped(false);
+    setKnown(new Set());
+    setCategory("All topics");
+    shuffleAllAfterCategoryChange.current = false;
+  }, [deck]);
+  useEffect(() => {
+    if (!categories.includes(category)) setCategory("All topics");
+  }, [categories, category]);
   useEffect(() => {
     const next = category === "All topics"
-      ? deck
+      ? shuffleAllAfterCategoryChange.current
+        ? shuffle(deck)
+        : deck
       : deck.filter((card) => card.category === category);
+    shuffleAllAfterCategoryChange.current = false;
     setOrder(next);
     setIndex(0);
     setFlipped(false);
@@ -56,7 +70,7 @@ export function StudyScreen({ deck }: Props) {
       <Flashcard card={current} flipped={flipped} onFlip={() => setFlipped((value) => !value)} />
       {flipped && <View style={styles.rating}><Text style={styles.ratingLabel}>How well did you know it?</Text><View style={styles.ratingRow}><Pressable style={[styles.ratingButton, styles.review]} onPress={() => next()}><Text style={styles.buttonText}>Review again</Text></Pressable><Pressable style={[styles.ratingButton, styles.mastered]} onPress={() => next(true)}><Text style={styles.buttonText}>Got it</Text></Pressable></View></View>}
       {!flipped && <Text style={styles.helper}>Think of the answer before you tap.</Text>}
-      <View style={styles.controls}><Pressable style={styles.secondary} onPress={() => { setFlipped(false); setIndex((value) => (value - 1 + order.length) % order.length); }}><Text style={styles.buttonText}>‹ Prev</Text></Pressable><Pressable style={styles.secondary} onPress={() => { setOrder(shuffle(order)); setIndex(0); setFlipped(false); }}><Text style={styles.buttonText}>Shuffle</Text></Pressable><Pressable style={styles.primary} onPress={() => next()}><Text style={styles.buttonText}>Next ›</Text></Pressable></View>
+      <View style={styles.controls}><Pressable style={styles.secondary} onPress={() => { setFlipped(false); setIndex((value) => (value - 1 + order.length) % order.length); }}><Text style={styles.buttonText}>‹ Prev</Text></Pressable><Pressable style={styles.secondary} onPress={() => { shuffleAllAfterCategoryChange.current = true; setCategory("All topics"); if (category === "All topics") { shuffleAllAfterCategoryChange.current = false; setOrder(shuffle(deck)); setIndex(0); setFlipped(false); } }}><Text style={styles.buttonText}>Shuffle all</Text></Pressable><Pressable style={styles.primary} onPress={() => next()}><Text style={styles.buttonText}>Next ›</Text></Pressable></View>
     </View>
   );
 }
