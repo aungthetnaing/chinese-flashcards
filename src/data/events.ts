@@ -1,4 +1,5 @@
 import { STARTER_DECK } from "./starterDeck";
+import { DESIGNER_GENES_DECK } from "./designerGenesDeck";
 import { Flashcard } from "../types";
 
 export interface SciOlyEvent {
@@ -20,6 +21,15 @@ export const SCIOLY_EVENTS: SciOlyEvent[] = [
     color: "#ef4444",
     available: true,
     starterDeck: STARTER_DECK,
+  },
+  {
+    id: "designer-genes",
+    name: "Designer Genes",
+    division: "Biology · Division C",
+    description: "Classic, evolutionary, and molecular genetics, biotechnology, and inheritance.",
+    color: "#22c55e",
+    available: true,
+    starterDeck: DESIGNER_GENES_DECK,
   },
   {
     id: "anatomy-physiology",

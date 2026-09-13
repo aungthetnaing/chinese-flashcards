@@ -6,6 +6,8 @@ built with Expo, React Native, and TypeScript.
 ## Included
 
 - A SciOly event picker with a dedicated Disease Detectives subsection.
+- A Designer Genes subsection with 145 genetics, inheritance, and biotechnology
+  cards expanded from forum Question Marathons and study discussions.
 - 300 Disease Detectives cards covering epidemiology foundations, outbreak
   investigation, study design, bias, statistics, surveillance, transmission,
   immunity, prevention, and causation.
@@ -56,6 +58,7 @@ network connection.
 App.tsx                         App shell and tab navigation
 src/data/events.ts              SciOly event registry and event subsections
 src/data/starterDeck.ts         Disease Detectives starter cards
+src/data/designerGenesDeck.ts   Designer Genes starter cards
 src/screens/EventsScreen.tsx    Biology event picker
 src/screens/StudyScreen.tsx    Flip-card study mode
 src/screens/BrowseScreen.tsx   Search and manage cards
