@@ -21,6 +21,8 @@ built with Expo, React Native, and TypeScript.
 - Disease Detectives study filters for every subcategory or a full-deck shuffle
   through **All topics**.
 - Flip cards with a question-first study flow.
+- Multiple-choice study mode with four generated answer choices, instant
+  feedback, and event/category-scoped questions for every active event.
 - Shuffle, previous/next, and “Review again” / “Got it” controls.
 - Searchable card library with topic labels.
 - Add custom question-and-answer cards.
