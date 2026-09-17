@@ -88,6 +88,7 @@ export function StudyScreen({ deck }: Props) {
       </View>
       <ScrollView
         horizontal
+        style={styles.categoryScroller}
         showsHorizontalScrollIndicator={false}
         contentContainerStyle={styles.categoryRow}
       >
@@ -170,6 +171,7 @@ const styles = StyleSheet.create({
   modeChipActive: { backgroundColor: colors.primary, borderColor: colors.primary },
   modeText: { color: colors.textMuted, fontSize: 10, fontWeight: "700" },
   modeTextActive: { color: colors.text },
+  categoryScroller: { flexGrow: 0, flexShrink: 0, height: 16 },
   categoryRow: { gap: 2, paddingBottom: 2 },
   categoryChip: { height: 14, paddingHorizontal: 4, borderRadius: 4, backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border, justifyContent: "center" },
   categoryChipActive: { backgroundColor: colors.primary, borderColor: colors.primary },
