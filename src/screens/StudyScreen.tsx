@@ -103,57 +103,59 @@ export function StudyScreen({ deck }: Props) {
           </Pressable>
         ))}
       </ScrollView>
-      <ScrollView
-        style={styles.studyArea}
-        contentContainerStyle={styles.studyContent}
-        showsVerticalScrollIndicator
-        onLayout={({ nativeEvent }) => setStudyHeight(nativeEvent.layout.height)}
-      >
-        <View style={styles.stats}><Text style={styles.progress}>{progress}</Text><Text style={styles.known}>{known.size} mastered</Text></View>
-        {mode === "flashcards" ? (
-          <>
-            <Flashcard
-              card={current}
-              flipped={flipped}
-              onFlip={() => setFlipped((value) => !value)}
-              height={Math.max(390, studyHeight - 48)}
-            />
-            {flipped && <View style={styles.rating}><Text style={styles.ratingLabel}>How well did you know it?</Text><View style={styles.ratingRow}><Pressable style={[styles.ratingButton, styles.review]} onPress={() => next()}><Text style={styles.buttonText}>Review again</Text></Pressable><Pressable style={[styles.ratingButton, styles.mastered]} onPress={() => next(true)}><Text style={styles.buttonText}>Got it</Text></Pressable></View></View>}
-            {!flipped && <Text style={styles.helper}>Think of the answer before you tap.</Text>}
-          </>
-        ) : (
-          <View style={[styles.quizCard, { minHeight: Math.max(300, studyHeight - 48) }]} {...swipeResponder.panHandlers}>
-            <Text style={styles.quizPrompt}>{current.front}</Text>
-            <Text style={styles.quizInstruction}>Choose the best answer. Swipe left for the next question.</Text>
-            <View style={styles.options}>
-              {choices.map((choice, optionIndex) => {
-                const isCorrect = choice === current.back;
-                const isSelected = choice === selectedAnswer;
-                return (
-                  <Pressable
-                    key={`${current.id}-${optionIndex}`}
-                    style={[styles.option, isSelected && (isCorrect ? styles.correct : styles.incorrect), selectedAnswer && isCorrect && styles.correct]}
-                    onPress={() => answer(choice)}
-                  >
-                    <Text style={styles.optionLabel}>{String.fromCharCode(65 + optionIndex)}.</Text>
-                    <Text style={styles.optionText}>{choice}</Text>
+      <View style={styles.studyViewport}>
+        <ScrollView
+          style={styles.studyArea}
+          contentContainerStyle={styles.studyContent}
+          showsVerticalScrollIndicator
+          onLayout={({ nativeEvent }) => setStudyHeight(nativeEvent.layout.height)}
+        >
+          <View style={styles.stats}><Text style={styles.progress}>{progress}</Text><Text style={styles.known}>{known.size} mastered</Text></View>
+          {mode === "flashcards" ? (
+            <>
+              <Flashcard
+                card={current}
+                flipped={flipped}
+                onFlip={() => setFlipped((value) => !value)}
+                height={Math.max(390, studyHeight - 48)}
+              />
+              {flipped && <View style={styles.rating}><Text style={styles.ratingLabel}>How well did you know it?</Text><View style={styles.ratingRow}><Pressable style={[styles.ratingButton, styles.review]} onPress={() => next()}><Text style={styles.buttonText}>Review again</Text></Pressable><Pressable style={[styles.ratingButton, styles.mastered]} onPress={() => next(true)}><Text style={styles.buttonText}>Got it</Text></Pressable></View></View>}
+              {!flipped && <Text style={styles.helper}>Think of the answer before you tap.</Text>}
+            </>
+          ) : (
+            <View style={[styles.quizCard, { minHeight: Math.max(300, studyHeight - 48) }]} {...swipeResponder.panHandlers}>
+              <Text style={styles.quizPrompt}>{current.front}</Text>
+              <Text style={styles.quizInstruction}>Choose the best answer. Swipe left for the next question.</Text>
+              <View style={styles.options}>
+                {choices.map((choice, optionIndex) => {
+                  const isCorrect = choice === current.back;
+                  const isSelected = choice === selectedAnswer;
+                  return (
+                    <Pressable
+                      key={`${current.id}-${optionIndex}`}
+                      style={[styles.option, isSelected && (isCorrect ? styles.correct : styles.incorrect), selectedAnswer && isCorrect && styles.correct]}
+                      onPress={() => answer(choice)}
+                    >
+                      <Text style={styles.optionLabel}>{String.fromCharCode(65 + optionIndex)}.</Text>
+                      <Text style={styles.optionText}>{choice}</Text>
+                    </Pressable>
+                  );
+                })}
+              </View>
+              {selectedAnswer && (
+                <>
+                  <Text style={[styles.feedback, selectedAnswer === current.back ? styles.feedbackCorrect : styles.feedbackIncorrect]}>
+                    {selectedAnswer === current.back ? "Correct" : "Not quite"} — {current.back}
+                  </Text>
+                  <Pressable style={styles.quizNext} onPress={() => next()}>
+                    <Text style={styles.buttonText}>Next question ›</Text>
                   </Pressable>
-                );
-              })}
+                </>
+              )}
             </View>
-            {selectedAnswer && (
-              <>
-                <Text style={[styles.feedback, selectedAnswer === current.back ? styles.feedbackCorrect : styles.feedbackIncorrect]}>
-                  {selectedAnswer === current.back ? "Correct" : "Not quite"} — {current.back}
-                </Text>
-                <Pressable style={styles.quizNext} onPress={() => next()}>
-                  <Text style={styles.buttonText}>Next question ›</Text>
-                </Pressable>
-              </>
-            )}
-          </View>
-        )}
-      </ScrollView>
+          )}
+        </ScrollView>
+      </View>
       <View style={styles.controls}><Pressable style={styles.secondary} onPress={() => { setFlipped(false); setSelectedAnswer(null); setIndex((value) => (value - 1 + order.length) % order.length); }}><Text style={styles.buttonText}>‹ Prev</Text></Pressable><Pressable style={styles.secondary} onPress={() => { shuffleAllAfterCategoryChange.current = true; setCategory("All topics"); if (category === "All topics") { shuffleAllAfterCategoryChange.current = false; setOrder(shuffle(deck)); setIndex(0); setFlipped(false); setSelectedAnswer(null); } }}><Text style={styles.buttonText}>Shuffle all</Text></Pressable><Pressable style={styles.primary} onPress={() => next()}><Text style={styles.buttonText}>Next ›</Text></Pressable></View>
     </View>
   );
@@ -172,7 +174,8 @@ const styles = StyleSheet.create({
   categoryText: { color: colors.textMuted, fontSize: 8, lineHeight: 9, fontWeight: "700" },
   categoryTextActive: { color: colors.text },
   stats: { flexDirection: "row", justifyContent: "space-between", marginBottom: spacing.sm },
-  studyArea: { flex: 1, flexGrow: 1, flexBasis: 0, minHeight: 0, alignSelf: "stretch" },
+  studyViewport: { flex: 1, minHeight: 0, alignSelf: "stretch" },
+  studyArea: { flex: 1, minHeight: 0 },
   studyContent: { flexGrow: 1, paddingBottom: spacing.sm },
   progress: { color: colors.textMuted, fontSize: 15, fontWeight: "700" },
   known: { color: colors.success, fontSize: 15, fontWeight: "700" },
