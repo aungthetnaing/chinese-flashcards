@@ -7,9 +7,10 @@ interface Props {
   card: FlashcardType;
   flipped: boolean;
   onFlip: () => void;
+  height?: number;
 }
 
-export function Flashcard({ card, flipped, onFlip }: Props) {
+export function Flashcard({ card, flipped, onFlip, height = 390 }: Props) {
   const anim = useRef(new Animated.Value(0)).current;
   useEffect(() => {
     Animated.spring(anim, { toValue: flipped ? 1 : 0, friction: 8, tension: 10, useNativeDriver: true }).start();
@@ -18,13 +19,13 @@ export function Flashcard({ card, flipped, onFlip }: Props) {
   const backRotate = anim.interpolate({ inputRange: [0, 1], outputRange: ["180deg", "360deg"] });
 
   return (
-    <Pressable style={styles.wrapper} onPress={onFlip} accessibilityRole="button" accessibilityLabel="Flashcard">
-      <Animated.View pointerEvents={flipped ? "none" : "auto"} style={[styles.card, styles.front, { transform: [{ perspective: 1000 }, { rotateY: frontRotate }] }]}>
+    <Pressable style={[styles.wrapper, { height }]} onPress={onFlip} accessibilityRole="button" accessibilityLabel="Flashcard">
+      <Animated.View pointerEvents={flipped ? "none" : "auto"} style={[styles.card, styles.front, { height, transform: [{ perspective: 1000 }, { rotateY: frontRotate }] }]}>
         <Text style={styles.category}>{card.category.toUpperCase()}</Text>
         <Text style={styles.question}>{card.front}</Text>
         <Text style={styles.hint}>Tap to reveal answer</Text>
       </Animated.View>
-      <Animated.View pointerEvents={flipped ? "auto" : "none"} style={[styles.card, styles.back, { transform: [{ perspective: 1000 }, { rotateY: backRotate }] }]}>
+      <Animated.View pointerEvents={flipped ? "auto" : "none"} style={[styles.card, styles.back, { height, transform: [{ perspective: 1000 }, { rotateY: backRotate }] }]}>
         <Text style={styles.category}>{card.category.toUpperCase()}</Text>
         <Text style={styles.answer}>{card.back}</Text>
         {card.source && <Text style={styles.source}>Source: {card.source}</Text>}
@@ -35,8 +36,8 @@ export function Flashcard({ card, flipped, onFlip }: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { width: "100%", flex: 1, minHeight: 390, justifyContent: "center", alignItems: "center" },
-  card: { position: "absolute", width: "100%", height: "100%", borderRadius: radius.lg, padding: spacing.lg, justifyContent: "center", alignItems: "center", backfaceVisibility: "hidden", borderWidth: 1, borderColor: colors.border },
+  wrapper: { width: "100%", minHeight: 390, justifyContent: "center", alignItems: "center" },
+  card: { position: "absolute", width: "100%", borderRadius: radius.lg, padding: spacing.lg, justifyContent: "center", alignItems: "center", backfaceVisibility: "hidden", borderWidth: 1, borderColor: colors.border },
   front: { backgroundColor: colors.surface },
   back: { backgroundColor: colors.surfaceAlt },
   category: { color: colors.accent, fontSize: 12, fontWeight: "800", letterSpacing: 1.2, marginBottom: spacing.lg },

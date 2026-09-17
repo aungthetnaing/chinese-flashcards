@@ -12,6 +12,7 @@ export function StudyScreen({ deck }: Props) {
   const [index, setIndex] = useState(0);
   const [flipped, setFlipped] = useState(false);
   const [known, setKnown] = useState<Set<string>>(new Set());
+  const [studyHeight, setStudyHeight] = useState(0);
   const [category, setCategory] = useState("All topics");
   const [mode, setMode] = useState<"flashcards" | "multiple-choice">("flashcards");
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -106,16 +107,22 @@ export function StudyScreen({ deck }: Props) {
         style={styles.studyArea}
         contentContainerStyle={styles.studyContent}
         showsVerticalScrollIndicator
+        onLayout={({ nativeEvent }) => setStudyHeight(nativeEvent.layout.height)}
       >
         <View style={styles.stats}><Text style={styles.progress}>{progress}</Text><Text style={styles.known}>{known.size} mastered</Text></View>
         {mode === "flashcards" ? (
           <>
-            <Flashcard card={current} flipped={flipped} onFlip={() => setFlipped((value) => !value)} />
+            <Flashcard
+              card={current}
+              flipped={flipped}
+              onFlip={() => setFlipped((value) => !value)}
+              height={Math.max(390, studyHeight - 48)}
+            />
             {flipped && <View style={styles.rating}><Text style={styles.ratingLabel}>How well did you know it?</Text><View style={styles.ratingRow}><Pressable style={[styles.ratingButton, styles.review]} onPress={() => next()}><Text style={styles.buttonText}>Review again</Text></Pressable><Pressable style={[styles.ratingButton, styles.mastered]} onPress={() => next(true)}><Text style={styles.buttonText}>Got it</Text></Pressable></View></View>}
             {!flipped && <Text style={styles.helper}>Think of the answer before you tap.</Text>}
           </>
         ) : (
-          <View style={styles.quizCard} {...swipeResponder.panHandlers}>
+          <View style={[styles.quizCard, { minHeight: Math.max(300, studyHeight - 48) }]} {...swipeResponder.panHandlers}>
             <Text style={styles.quizPrompt}>{current.front}</Text>
             <Text style={styles.quizInstruction}>Choose the best answer. Swipe left for the next question.</Text>
             <View style={styles.options}>
