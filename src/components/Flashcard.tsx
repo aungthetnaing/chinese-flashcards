@@ -35,7 +35,7 @@ export function Flashcard({ card, flipped, onFlip }: Props) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: { width: "100%", height: 390, justifyContent: "center", alignItems: "center" },
+  wrapper: { width: "100%", flex: 1, minHeight: 390, justifyContent: "center", alignItems: "center" },
   card: { position: "absolute", width: "100%", height: "100%", borderRadius: radius.lg, padding: spacing.lg, justifyContent: "center", alignItems: "center", backfaceVisibility: "hidden", borderWidth: 1, borderColor: colors.border },
   front: { backgroundColor: colors.surface },
   back: { backgroundColor: colors.surfaceAlt },
