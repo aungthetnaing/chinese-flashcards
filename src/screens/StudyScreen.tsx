@@ -119,7 +119,16 @@ export function StudyScreen({ deck }: Props) {
               );
             })}
           </View>
-          {selectedAnswer && <Text style={[styles.feedback, selectedAnswer === current.back ? styles.feedbackCorrect : styles.feedbackIncorrect]}>{selectedAnswer === current.back ? "Correct" : "Not quite"} — {current.back}</Text>}
+          {selectedAnswer && (
+            <>
+              <Text style={[styles.feedback, selectedAnswer === current.back ? styles.feedbackCorrect : styles.feedbackIncorrect]}>
+                {selectedAnswer === current.back ? "Correct" : "Not quite"} — {current.back}
+              </Text>
+              <Pressable style={styles.quizNext} onPress={() => next()}>
+                <Text style={styles.buttonText}>Next question ›</Text>
+              </Pressable>
+            </>
+          )}
         </View>
       )}
       <View style={styles.controls}><Pressable style={styles.secondary} onPress={() => { setFlipped(false); setSelectedAnswer(null); setIndex((value) => (value - 1 + order.length) % order.length); }}><Text style={styles.buttonText}>‹ Prev</Text></Pressable><Pressable style={styles.secondary} onPress={() => { shuffleAllAfterCategoryChange.current = true; setCategory("All topics"); if (category === "All topics") { shuffleAllAfterCategoryChange.current = false; setOrder(shuffle(deck)); setIndex(0); setFlipped(false); setSelectedAnswer(null); } }}><Text style={styles.buttonText}>Shuffle all</Text></Pressable><Pressable style={styles.primary} onPress={() => next()}><Text style={styles.buttonText}>Next ›</Text></Pressable></View>
@@ -155,6 +164,7 @@ const styles = StyleSheet.create({
   feedback: { marginTop: spacing.md, fontWeight: "800", lineHeight: 21 },
   feedbackCorrect: { color: colors.success },
   feedbackIncorrect: { color: colors.danger },
+  quizNext: { marginTop: spacing.md, backgroundColor: colors.primary, padding: spacing.md, borderRadius: radius.md, alignItems: "center" },
   rating: { marginTop: spacing.md },
   ratingLabel: { color: colors.textMuted, textAlign: "center", marginBottom: spacing.sm },
   ratingRow: { flexDirection: "row", gap: spacing.sm },
