@@ -103,12 +103,14 @@ export function StudyScreen({ deck }: Props) {
           </Pressable>
         ))}
       </ScrollView>
-      <View style={styles.studyViewport}>
+      <View
+        style={styles.studyViewport}
+        onLayout={({ nativeEvent }) => setStudyHeight(nativeEvent.layout.height)}
+      >
         <ScrollView
           style={styles.studyArea}
           contentContainerStyle={styles.studyContent}
           showsVerticalScrollIndicator
-          onLayout={({ nativeEvent }) => setStudyHeight(nativeEvent.layout.height)}
         >
           <View style={styles.stats}><Text style={styles.progress}>{progress}</Text><Text style={styles.known}>{known.size} mastered</Text></View>
           {mode === "flashcards" ? (
