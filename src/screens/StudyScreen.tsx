@@ -172,7 +172,7 @@ const styles = StyleSheet.create({
   categoryText: { color: colors.textMuted, fontSize: 8, lineHeight: 9, fontWeight: "700" },
   categoryTextActive: { color: colors.text },
   stats: { flexDirection: "row", justifyContent: "space-between", marginBottom: spacing.sm },
-  studyArea: { flex: 1 },
+  studyArea: { flex: 1, flexGrow: 1, flexBasis: 0, minHeight: 0, alignSelf: "stretch" },
   studyContent: { flexGrow: 1, paddingBottom: spacing.sm },
   progress: { color: colors.textMuted, fontSize: 15, fontWeight: "700" },
   known: { color: colors.success, fontSize: 15, fontWeight: "700" },
