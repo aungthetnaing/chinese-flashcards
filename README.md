@@ -9,13 +9,13 @@ built with Expo, React Native, and TypeScript.
 - A Designer Genes subsection with 370 genetics, inheritance, and biotechnology
   cards based on the official event wiki, OpenStax Biology, Campbell Biology,
   forum Question Marathons, and study discussions.
-- An Anatomy & Physiology subsection with 322 cards based on the official
+- An Anatomy & Physiology subsection with 462 cards based on the official
   Science Olympiad event pages, OpenStax Anatomy and Physiology, and
   supplemental Scioly.org Question Marathon prompts.
 - A Chemistry Lab subsection with 320 cards based on the official Chem Lab
   event page, the Scioly.org Chemistry Lab reference, OpenStax Chemistry, and
   supplemental Question Marathon/forum prompts.
-- 380 Disease Detectives cards covering epidemiology foundations, outbreak
+- 520 Disease Detectives cards covering epidemiology foundations, outbreak
   investigation, study design, bias, statistics, surveillance, transmission,
   immunity, prevention, and causation.
 - Disease Detectives study filters for every subcategory or a full-deck shuffle
